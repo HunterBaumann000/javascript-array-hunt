@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function (searchString, position) {
     var australianAnimals = ["bandicoot", "crocodile", "dingo", "echidna",
         "frilled-dragon", "kangaroo", "koala", "ostrich", "platypus",
         "striped-possum", "tasmanian-devil", "wombat"];
@@ -92,19 +92,40 @@ $(document).ready(function () {
         /*
         Find the first and last string in the array.
         Output them to td#firstLast
-         */
+        */
+        var first = myArray[0]
+        var count = myArray.length
+        var last = myArray[count - 1]
+
+        $("td#firstLast").text(first + " and " + last)
 
 
         /*
         Find the first string that contains an 'n'.
         Output it to td#firstEnn
          */
-
+        for (var i=0; i < myArray.length; i++) {
+            if (myArray[i].startsWith("n")) {
+                $("td#firstEnn").text(myArray[i])
+                break;
+            } else {
+                $("td#firstEnn").text("There's no matches for this Hunt!")
+            }
+        }
 
         /*
         Find all of the strings with less than 6 characters.
         Output them to td#lessThanSix
          */
+
+        words6Fewer = [];
+
+        for (var j=0; j < myArray.length; j++) {
+            if (!(myArray[j].charAt(6))) {
+                words6Fewer.push(" " + [myArray[j]])
+            }
+        }
+        $("td#lessThanSix").text(words6Fewer)
 
 
         /*
@@ -112,24 +133,64 @@ $(document).ready(function () {
         Output it to td#longName
          */
 
+        longestWord = [];
+
+        for (var k=0; k < myArray.length; k++) {
+            if (myArray[k].charAt(14)) {
+                longestWord.push([myArray[k]])
+            }
+        }
+        $("td#longName").text(longestWord);
+
+
 
         /*
         Find all of the strings that do not contain the letter 's'.
         Output them to td#noEss
          */
+        wordsWithoutEss = [];
+
+        for (var q=0; q < myArray.length; q++) {
+            if (!(myArray[q].includes("s"))) {
+                wordsWithoutEss.push(" " + [myArray[q]])
+            }
+        }
+        $("td#noEss").text(wordsWithoutEss);
 
 
         /*
         Output all of the strings, but with all of their vowels
         in uppercase, to td#upperVowels
-         */
+
+
+        vowelArray = [myArray]
+        for (var u=0; u < myArray.length; u++) {
+            if (myArray[u] === 'a' || myArray[u] === 'e' ||
+                myArray[u] === 'i' || myArray[u] === 'o' ||
+                myArray[u] === 'u') {
+
+                vowelArray.push(" " + [myArray[u]].replaceAll(("a","e","i","o","u").to("A","E","I","O","U")])
+            } else if
+               (myArray[u] !== 'a' || myArray[u] !== 'e' ||
+                myArray[u] !== 'i' || myArray[u] !== 'o' ||
+                myArray[u] !== 'u') {
+
+                vowelArray.push(" " + [myArray[u]])
+            }
+        }
+        $("td#upperVowels").text(vowelArray)
+        */
 
 
         /*
         Output all of the strings in reverse order and separated by
         ' - ' to td#reverseDash
          */
+        reverseArray = [myArray.reverse().join(" - ")]
 
+        $("td#reverseDash").text(reverseArray)
+        //join
+        //reverse ( " - " )
 
     }
 
